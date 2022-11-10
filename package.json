@@ -1,0 +1,22 @@
+{
+  "name": "gijinka-manga-bot",
+  "version": "1.0.0",
+  "description": "asdfasdfasdf",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mhdfadlyhasan/gijinka-manga-bot.git"
+  },
+  "keywords": [
+    "oneshotthebestshot"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mhdfadlyhasan/gijinka-manga-bot/issues"
+  },
+  "homepage": "https://github.com/mhdfadlyhasan/gijinka-manga-bot#readme"
+}
