@@ -10,3 +10,5 @@ how to deploy
 1. npm start
 1. what
 1. bruh
+
+Tahukah kamu kalau 
