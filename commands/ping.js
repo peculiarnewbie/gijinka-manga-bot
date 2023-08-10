@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
 const { newManga } = require("../manga.js");
+const axios = require('axios');
 
 module.exports = {
 	data: new SlashCommandBuilder().setName("ping").setDescription("Replies with Pong!"),
