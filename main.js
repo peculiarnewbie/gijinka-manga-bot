@@ -1,4 +1,5 @@
 const fs = require("node:fs");
+const path = require("node:path");
 const { REST, Routes, Client, GatewayIntentBits, Collection } = require("discord.js");
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 const axios = require('axios');
@@ -75,7 +76,7 @@ client.on("interactionCreate", async (interaction) => {
 const rest = new REST({ version: "10" }).setToken(TOKEN);
 
 const commandJSON = [];
-client.commands.forEach((_, cmd) => {commandJSON.push(cmd.data.toJSON())});
+client.commands.forEach(cmd => {commandJSON.push(cmd.data.toJSON())});
 
 (async () => {
   try {
