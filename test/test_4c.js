@@ -18,21 +18,8 @@ async function getCatalog(board) {
     const res = await axios({
       method: "GET",
       url: `https://a.4cdn.org/${board}/catalog.json`,
-    }).then((res) => {
-      res.data.forEach((page) => {
-        page.threads.forEach((item) => {
-          const catalogObj = {
-            thread: item.no,
-            title: item.sub,
-            reply: item.replies,
-          };
-          catalogArr.push(catalogObj);
-        });
-      });
-      catalogArr.sort((a, b) => b.reply - a.reply);
-      console.log("array sorter");
-      return catalogArr;
     });
+      return res.data;
   } catch (e) {
     console.error(e);
   }
@@ -65,21 +52,33 @@ async function getThread(board, thread) {
 //     return e;
 //   });
 
-// const catalogArr = [];
-// const catalogList = getCatalog(board).then((resp) => {
-//   resp.forEach((page) => {
-//     page.threads.forEach((item) => {
-//       const catalogObj = {
-//         thread: item.no,
-//         title: item.sub,
-//         reply: item.replies,
-//       };
-//       catalogArr.push(catalogObj);
-//     });
-//   });
-//   catalogArr.sort((a, b) => b.reply - a.reply);
-//   return catalogArr;
-// });
+function htmlclean(escapedHTML) {
+  return escapedHTML.replace(/(<([^>]+)>)/gi, "").replace(/&#039;/g,"'").replace(/&lt;/g,'<').replace(/&gt;/g,'\n>').replace(/&amp;/g,'&');
+}
 
-// const vava = getCatalog("vt")
-// console.log(vava)
+const catalogArr = [];
+const catalogList = getCatalog("vt").then((resp) => {
+  resp.forEach((page) => {
+    page.threads.forEach((item) => {
+      const catalogObj = {
+        thread: item.no,
+        title: item.sub,
+        body: item.com,
+        reply: item.replies,
+      };
+      catalogArr.push(catalogObj);
+    });
+  });
+  catalogArr.sort((a, b) => b.reply - a.reply);
+  console.log(catalogArr[0])
+  if (catalogArr[0].body) {
+    console.log(htmlclean(catalogArr[0].body.substring(0,500)))
+  }
+  console.log(typeof(catalogArr[0].body))
+  return catalogArr;
+});
+
+// const vava = getCatalog("vt").then((res) => {
+//   console.log();
+// })
+// console.log(vava);
