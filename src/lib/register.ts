@@ -1,4 +1,4 @@
-import { Command } from "../types";
+import { CommandData } from "../types";
 import * as commands from "./commands";
 
 const token = process.env.DISCORD_TOKEN;
@@ -13,9 +13,10 @@ if (!applicationId) {
 	);
 }
 
-const allCommands: Command[] = Object.values(commands);
-
-console.log("Registering commands", allCommands);
+const allCommands: CommandData[] = Object.values(commands).map((command) => ({
+	name: command.name,
+	description: command.description,
+}));
 
 await registerGlobalCommands();
 

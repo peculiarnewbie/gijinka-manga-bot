@@ -1,5 +1,9 @@
 name = "gijinka-manga-bot"
 compatibility_date = "2023-12-01"
+main = "src/server.ts"
+
+[vars]
+DISCORD_PUBLIC_KEY = "de20f3250cde0d4e3613c0c7d78f1f7ad2d57adb3050d0ec309a571d5f92368d"
 
 # [vars]
 # MY_VAR = "my-variable"
