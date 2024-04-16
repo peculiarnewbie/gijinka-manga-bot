@@ -25,25 +25,24 @@ app.post("/", async (c) => {
 	const timestamp = c.req.header("x-signature-timestamp") ?? "";
 	const body = await c.req.arrayBuffer();
 	console.log("signature", signature);
-	let isValidRequest = false;
-	try {
-		isValidRequest = verifyKey(
-			body,
-			signature,
-			timestamp,
-			c.env.DISCORD_PUBLIC_KEY ?? ""
-		);
-		console.log("isValidRequest", isValidRequest);
-	} catch (e) {
-		console.error("Error verifying request", e);
-		return new Response("Error verifying request", { status: 401 });
-	}
+	let isValidRequest = verifyKey(
+		body,
+		signature,
+		timestamp,
+		c.env.DISCORD_PUBLIC_KEY ?? ""
+	);
+	console.log("isValidRequest", isValidRequest);
 	if (!isValidRequest) {
 		console.error("Invalid Request");
 		return new Response("Bad request signature.", { status: 401 });
 	}
 
 	return handler(c);
+});
+
+app.get("/manga", async (c) => {
+	console.log("Handling manga request");
+	return c.json({ manga: await commands.manga.function() });
 });
 
 async function handler(
@@ -56,7 +55,6 @@ async function handler(
 	>
 ) {
 	const message = await c.req.json();
-	console.log("message", message);
 	if (message.type === InteractionType.PING) {
 		console.log("Handling Ping request");
 		return c.json({

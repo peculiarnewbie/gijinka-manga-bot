@@ -1,5 +1,7 @@
+import { Context } from "hono";
+
 export type Command = CommandData & {
-	function: () => Promise<any>;
+	function: (c?: Context<any, any, any>) => Promise<any>;
 };
 
 export type CommandData = {
